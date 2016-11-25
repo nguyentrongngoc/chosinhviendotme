@@ -153,6 +153,8 @@
     <!------------------------- END Header -------------->
 				
 				
+				
+				
             <div class="col-md-9">
 
   
@@ -161,48 +163,34 @@
 	
                 <form role="form" method="POST" action="#">
 
-                  <legend class="text-center active">  <label>Đăng kí tài khoản</label></legend>
+                  <legend class="text-center active">  <label>Đăng Tin Rao Vặt</label></legend>
 
                     <fieldset>
-                        <legend>Thông tin tài khoản</legend>
+                  
 
-                        <div class="form-group col-md-6">
-                            <label for="first_name">Tên của bạn</label>
-                            <input type="text" class="form-control" name="" id="first_name" placeholder="Nhập tên">
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label for="last_name">Họ của bạn</label>
-                            <input type="text" class="form-control" name="last_name" id="" placeholder="Nhập Họ">
-                        </div>
-
+                      
                         <div class="form-group col-md-12">
-                            <label for="">Email</label>
-                            <input type="email" class="form-control" name="" id="" placeholder="Email">
+                            <label for="">Tiêu Đề<i style="color:red">*</i></label>
+                            <input type="email" class="form-control" name="" id="" placeholder="Nhập tiêu đề">
                         </div>
-						<div class="form-group col-md-12">
-                            <label for="">Số điện thoại</label>
-                            <input type="email" class="form-control" name="" id="" placeholder="Số điện thoại">
+						  <div class="form-group col-md-12">
+                            <label for="specify">Nội Dung Bài Đăng<i style="color:red">*</i></label>
+                            <textarea class="form-control" id="specify" name="" placeholder="Nội dung đăng"></textarea>
                         </div>
-
-                        <div class="form-group col-md-6">
-                            <label for="password">Mật khẩu</label>
-                            <input type="password" class="form-control" name="" id="password" placeholder="Mật khẩu">
+				<div class="form-group col-md-12">
+                            <label for="">Giá<i style="color:red">*</i></label>
+                            <input type="email" class="form-control" name="" id="" placeholder="Giá VNĐ">
                         </div>
-
-                        <div class="form-group col-md-6">
-                            <label for="confirm_password">Nhập lại mật khẩu</label>
-                            <input type="password" class="form-control" name="" id="confirm_password" placeholder="Nhập lại mật khẩu">
-                        </div>
+                   
 
 
                     </fieldset>
 
                     <fieldset>
-                        <legend>Thông tin cá nhân</legend>
+                    
 
                         <div class="form-group col-md-6">
-                            <label for="country">Quận trong thành phố</label>
+                            <label for="country">Quận/Huyện</label>
                             <select class="form-control" name="" id="country">
                                 <option>Quận 1</option>
                                 <option>Quận 2</option>
@@ -210,19 +198,110 @@
 								<option>Quận Tân Phú</option>
 								<option>Quận Bình Thạnh</option>
                                 <option>Quận Thủ Đức</option>
+								
+								
+								
+					
+					
+					
                             </select>
                         </div>
-
-                        <div class="form-group col-md-12">
-                            <label for="">Địa chỉ</label>
-                            <input type="email" class="form-control" name="" id="" placeholder="Nhập địa chỉ">
+						
+						
+						 <div class="form-group col-md-6">
+                            <label for="">Số Điện Thoại<i style="color:red">*</i></label>
+                            <input type="email" class="form-control" name="" id="" placeholder="SĐT	">
                         </div>
-
-
-                        <div class="form-group col-md-12">
-                            <label for="specify">Đôi chút về bạn</label>
-                            <textarea class="form-control" id="specify" name=""></textarea>
+						
+                        <div class="form-group col-md-6">
+                            <label for="country">Chuyên Mục<i style="color:red">*</i>	</label>
+                            <select class="form-control" name="" id="country">
+                               
+					<option><span class="glyphicon glyphicon-user"></span> Thời Trang</option>
+                     <option><span class="glyphicon glyphicon-briefcase"></span> Việc Làm</option>
+					 <option><span class="glyphicon glyphicon-home"></span> Nhà ở</option>
+					 <option><span class="glyphicon glyphicon-heart"></span> Đồ ăn/Thức uống</option>
+					 <option><span class="glyphicon glyphicon glyphicon-book"></span> Sách vở</option>
+					 <option><span class="glyphicon glyphicon-wrench"></span> Điện Tử</option>
+                     <option><span class="glyphicon glyphicon-phone"></span> Điện Thoại</option>
+					 <option><span class="glyphicon glyphicon glyphicon-camera"></span> Máy ảnh</option>
+					 <option><span class="glyphicon glyphicon glyphicon-headphones"></span> Tai Nghe</option>
+					 <option><span class="glyphicon glyphicon-plane"></span> Xe Máy/Xe đạp</option>
+					 <option><span class="glyphicon glyphicon-piggy-bank"></span> Linh Tinh	</option>
+                            </select>
+							
                         </div>
+			
+			 <div class="form-group col-md-6">
+                            <label for="">Mật khẩu tin đăng</label>
+                            <input type="email" class="form-control" name="" id="" placeholder="Mật khẩu tin đăng">
+                        </div>
+		
+
+<div class="col-md-12" >
+    <div class="form-group">
+        <label>Thêm ảnh (tối đa 4 ảnh)</label>
+        <div class="input-group" style="margin-bottom:2px">
+           
+            <input type="text" class="form-control" readonly >
+			 <span class="input-group-btn">
+                <span class="btn btn-default btn-file">
+                      <span class="glyphicon glyphicon-folder-open"></span> Tải ảnh lên<input type="file" id="imgInp">
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group" style="margin-bottom:2px">
+           
+            <input type="text" class="form-control" readonly >
+			 <span class="input-group-btn">
+                <span class="btn btn-default btn-file">
+                      <span class="glyphicon glyphicon-folder-open"></span> Tải ảnh lên<input type="file" id="imgInp1">
+                </span>
+            </span>
+        </div>
+		
+	
+    </div>
+	 <div class="form-group">
+        <div class="input-group" style="margin-bottom:2px">
+           
+            <input type="text" class="form-control" readonly >
+			 <span class="input-group-btn">
+                <span class="btn btn-default btn-file">
+                      <span class="glyphicon glyphicon-folder-open"></span> Tải ảnh lên<input type="file" id="imgInp2">
+                </span>
+            </span>
+        </div>
+		
+	
+    </div>
+	 <div class="form-group">
+        <div class="input-group" style="margin-bottom:2px">
+           
+            <input type="text" class="form-control" readonly >
+			 <span class="input-group-btn">
+                <span class="btn btn-default btn-file">
+                      <span class="glyphicon glyphicon-folder-open"></span> Tải ảnh lên<input type="file" id="imgInp3">
+                </span>
+            </span>
+        </div>
+		
+	
+    </div>
+	
+	
+	
+	
+	<img class="col-md-6 img-responsive" id='img-upload'/>	
+	<img class="col-md-6 img-responsive" id='img-upload1'/>
+	<img class="col-md-6 img-responsive" id='img-upload2'/>
+	<img class="col-md-6 img-responsive" id='img-upload3'/>
+			
+		
+</div>
+
 
                     </fieldset>
 
@@ -240,7 +319,7 @@
                     <div class="form-group">
                         <div class="col-md-12">
                             <button type="submit" class="btn btn-primary">
-                                Đăng kí
+                                Đăng Tin
                             </button>
                            
                         </div>
@@ -282,6 +361,8 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/uploadimg.js"></script>
+
 
 </body>
 
