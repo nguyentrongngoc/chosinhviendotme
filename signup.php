@@ -1,6 +1,11 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
-
+<?php
+include('header.php');
+?>
 <body>
  <!------------------------- Menu bar & login -------------->
 
@@ -47,7 +52,7 @@ include('category_post.php');
 
   <?php
 
- if (!isset($_SESSION['email'])) 
+ if (!isset($_SESSION['id_member'])) 
 { //chưa đăng nhập
      echo "";
 }

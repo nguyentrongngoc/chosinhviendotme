@@ -21,7 +21,7 @@
  <!-- Footer -->
 	
  
-			<a id="back-to-top" href="#" class="btn btn-default btn-lg back-to-top" role="button" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
+			<a id="back-to-top" href="#" class="btn btn-default btn-md back-to-top" role="button" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
 			
     
 

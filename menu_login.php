@@ -1,29 +1,4 @@
-<head>
-<link rel="shortcut icon" href="http://localhost:8080/chosinhvien/img/favicon.png" type="image/x-icon" />
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Chosinhvien.me | Kênh rao vặt dành cho Sinh Viên</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="https://bootswatch.com/flatly/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="http://localhost:8080/chosinhvien/css/shop-homepage.css" rel="stylesheet">
-<link href="http://localhost:8080/chosinhvien/css/login.css" rel="stylesheet">
-<script src="http://localhost:8080/chosinhvien/js/jquery.js"></script>
-<script src="http://localhost:8080/chosinhvien/js/uploadimg.js"></script>
-    <script src="http://localhost:8080/chosinhvien/js/bootstrap.min.js"></script>
- <script src="http://localhost:8080/chosinhvien/js/gotop.js"></script>
- <script src="http://localhost:8080/chosinhvien/js/validador.js"></script>
-
-<?php
-///error_reporting(0); // chăn thông báo lỗi
-?>
-</head>
 
     <!-- Navigation -->
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -37,7 +12,7 @@
       </button>
 
       
-    <a class="navbar-brand " style="color:white" href="http://localhost:8080/chosinhvien/index.php"><span class="glyphicon glyphicon-shopping-cart"></span>  Chợsinhviên.me</a>
+    <a class="navbar-brand" href="http://localhost:8080/chosinhvien/index.php"><span class="glyphicon glyphicon-shopping-cart"></span>  Chợsinhviên.me</a>
 	
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#search">
      <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
@@ -46,49 +21,66 @@
     </div>
     <div class="collapse navbar-collapse" id="menu">
       <ul class="nav navbar-nav">
-	   <li>
-                        <a href="http://localhost:8080/chosinhvien/index.php"><span class="glyphicon glyphicon-home"></span> Trang Chủ</a>
-                    </li>
           <li>
-                        <a href="aboutus.html"><span class="glyphicon glyphicon-exclamation-sign"></span> About us</a>
+                        <a href="http://localhost:8080/chosinhvien/aboutus.php"><span class="glyphicon glyphicon-exclamation-sign"></span> Giới thiệu</a>
                     </li>
 				
-					
-                    
-						
-						
 						
 						<!-- Search bar PC -->
-         <form class="navbar-form navbar-right hidden-sm hidden-xs" role="search" action="http://localhost:8080/chosinhvien/search" method="GET">
+         <form   data-toggle="validator" class="navbar-form navbar-right hidden-sm hidden-xs" role="search" action="http://localhost:8080/chosinhvien/search" method="GET">
       <div class="input-group">
-      <input type="text" class="form-control" style="width:350px" name="keyword" placeholder="Bạn muốn tìm gì.."/>
       <span class="input-group-btn">
-        <button class="btn btn-default" type="submit">  <i class="glyphicon glyphicon-search"></i> Tìm kiếm</button>
+        <select class="form-control" style='max-width:20%;' name="address" id="address">
+                                      <option value="TP.HCM">TP.HCM</option>
+                                      <option value="ĐH CNTT">ĐH Công nghệ thông tin</option>
+                                      <option value="ĐH CNTT">ĐH Công nghệ thông tin</option>
+                                      <option value="ĐH KHXHNV">ĐH Khoa học XH và NV</option>
+                                      <option value="ĐH B.Khoa">ĐH Bách Khoa</option>
+                                      <option value="ĐH KHTN">ĐH Khoa học Tự nhiên</option>
+                                      <option value="ĐH Q.Tế">ĐH Quốc tế</option>
+                                      <option value="ĐH KTLuật" >ĐH Kinh Tế Luật</option>
+                                      <option value="KHoa Y">Khoa Y</option>
+                                      <option value="Quận 1">Quận 1</option>
+                                      <option value="Quận 2">Quận 2</option>
+                                      <option value="Quận 3">Quận 3</option>
+                                      <option value="Quận 4">Quận 4</option>
+                                      <option value="Quận 5">Quận 5</option>
+                                      <option value="Quận 6">Quận 6</option>
+                                      <option value="Quận 7">Quận 7</option>
+                                      <option value="Quận 8">Quận 8</option>
+                                      <option value="Quận 9">Quận 9</option>
+                                      <option value="Quận 10">Quận 10</option>
+                                      <option value="Quận 11">Quận 11</option>
+                                      <option value="Quận 12">Quận 12</option>
+                                      <option value="Quận T.Đức">Quận Thủ Đức</option>
+                                      <option value="Quận G.Vấp">Quận Gò Vấp</option>
+                                      <option value="Quận B.Thạnh">Quận Bình Thạnh</option>
+                                      <option value="Quận T.Bình">Quận Tân Bình</option>
+                                      <option value="Quận T.Phú">Quận Tân Phú</option>
+                                      <option value="Quận P.Nhuận">Quận Phú Nhuận</option>
+                                      <option value="Quận B.Tân">Quận Bình Tân</option>
+                            </select>
+      <input type="text" class="form-control" style="width:275px" name="keyword" placeholder="Bạn muốn tìm gì.."  required/>
+      
+        <button class="btn btn-default" style='border-top-right-radius: 4px;border-bottom-right-radius: 4px;' type="submit">  <i class="glyphicon glyphicon-search"></i> Tìm kiếm</button>
       </span>
+      </div>
       </form>
 	  
 
 <!-- Search bar PC -->
-
-	  
 	
-      </ul> 
-
-
-
-
-
+      </ul>
 	      <ul class="nav navbar-nav navbar-right">
 
 
 
 
 <?php
-    session_start();
 
 //tiến hành kiểm tra là người dùng đã đăng nhập hay chưa
 //nếu chưa, chuyển hướng người dùng ra lại trang đăng nhập
-if (!isset($_SESSION['email'])) 
+if (!isset($_SESSION['id_member'])) 
 { //chưa đăng nhập
      echo "      <li><a href='http://localhost:8080/chosinhvien/signup.php'><span class='glyphicon glyphicon-pencil'></span> Đăng kí</a></li>
       <li>
@@ -96,8 +88,8 @@ if (!isset($_SESSION['email']))
 }
 else
   { //đã đăng nhâp
-    echo " <li><a href='http://localhost:8080/chosinhvien/user/?email=";
-    echo $_SESSION['email'];
+    echo " <li><a href='http://localhost:8080/chosinhvien/user/?id_member=";
+    echo $_SESSION['id_member'];
     echo "'> <span class='glyphicon glyphicon-user'></span> ";
 
     echo $_SESSION['first_name'];
@@ -111,18 +103,57 @@ else
 
 
 
+
     </ul>
 	
     </div>
     <!-- Search bar Mobile -->
     <div class="collapse navbar-collapse hidden-lg" id="search">
-      <form class="mobile_search hidden-md hidden-lg" role="search" action="http://localhost:8080/chosinhvien/search" method="GET">
+
+      <form  data-toggle="validator" class="mobile_search hidden-md hidden-lg" role="search" action="http://localhost:8080/chosinhvien/search" method="GET">
       <div class="input-group">
-      <input type="text" class="form-control" name="keyword" placeholder="Bạn muốn tìm gì..."/>
+        <span class="input-group-form">
+       
+        <select class="form-control" name="address" id="address"  style="width:35%">
+                                      <option value="TP.HCM">TP.HCM</option>
+                                      <option value="ĐH CNTT">ĐH Công nghệ thông tin</option>
+                                      <option value="ĐH CNTT">ĐH Công nghệ thông tin</option>
+                                      <option value="ĐH KHXHNV">ĐH Khoa học XH và NV</option>
+                                      <option value="ĐH B.Khoa">ĐH Bách Khoa</option>
+                                      <option value="ĐH KHTN">ĐH Khoa học Tự nhiên</option>
+                                      <option value="ĐH Q.Tế">ĐH Quốc tế</option>
+                                      <option value="ĐH KTLuật" >ĐH Kinh Tế Luật</option>
+                                      <option value="KHoa Y">Khoa Y</option>
+                                      <option value="Quận 1">Quận 1</option>
+                                      <option value="Quận 2">Quận 2</option>
+                                      <option value="Quận 3">Quận 3</option>
+                                      <option value="Quận 4">Quận 4</option>
+                                      <option value="Quận 5">Quận 5</option>
+                                      <option value="Quận 6">Quận 6</option>
+                                      <option value="Quận 7">Quận 7</option>
+                                      <option value="Quận 8">Quận 8</option>
+                                      <option value="Quận 9">Quận 9</option>
+                                      <option value="Quận 10">Quận 10</option>
+                                      <option value="Quận 11">Quận 11</option>
+                                      <option value="Quận 12">Quận 12</option>
+                                      <option value="Quận T.Đức">Quận Thủ Đức</option>
+                                      <option value="Quận G.Vấp">Quận Gò Vấp</option>
+                                      <option value="Quận B.Thạnh">Quận Bình Thạnh</option>
+                                      <option value="Quận T.Bình">Quận Tân Bình</option>
+                                      <option value="Quận T.Phú">Quận Tân Phú</option>
+                                      <option value="Quận P.Nhuận">Quận Phú Nhuận</option>
+                                      <option value="Quận B.Tân">Quận Bình Tân</option>
+                            </select>
+       </span>
+      <input  style="width:65%" data-error="Vui lòng nhập từ khóa muốn tìm kiếm" type="text" class="form-control" name="keyword" placeholder="Bạn muốn tìm gì..."  required/>
       <span class="input-group-btn">
-        <button class="btn btn-default" type="submit">  <i class="glyphicon glyphicon-search"></i></button>
-      </span>
+        <button  class="btn btn-default" type="submit">  <i class="glyphicon glyphicon-search"></i></button>
+      
+       </span>
+       </div>
 </form>
+
+
     </div>
 
     <!-- Search bar Mobile -->
@@ -136,10 +167,9 @@ else
  <!-- END Navigation -->
 
  
-  
+
 	
-	
-    <!-- Sign In -->
+    <!-- Login  form-->
 <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     	  <div class="modal-dialog">
 				<div class="loginmodal-container">
@@ -158,8 +188,7 @@ else
 				</div>
 			</div>
 		  </div>
-    <!-- Sign In -->
+    <!-- Login form-->
 	
 	    <!------------------------- END Header -------------->
-	
 	

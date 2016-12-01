@@ -1,7 +1,12 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
-
+<?php
+include('header.php');
+?>
 <body>
  <!------------------------- Menu bar & login -------------->
 
@@ -37,7 +42,7 @@ include('category_post.php');
 
 
   include('connect.php');
-  $email      = $_POST["email"];
+  $id_member      = $_SESSION['id_member'];
 	$title			= $_POST["title"];
 	$content   	= $_POST["content"];
 	$price      = $_POST["price"];
@@ -82,10 +87,7 @@ include('category_post.php');
                   {
                       $img[$i]=$url;
                   }
-
-
-            //$sql="INSERT INTO img(phone, imglink) VALUES ('$phone','$url')";
-            //$conn->query($sql);               
+        
           }
           
         }
@@ -96,13 +98,16 @@ include('category_post.php');
 
 
 
-$sql = "INSERT INTO postads(email,title,content,price,address,contact,category,user,time,img_1,img_2,img_3,img_4)
-  VALUES ('$email','$title','$content','$price','$address','$contact','$category','$user','$time','$img[0]','$img[1]','$img[2]','$img[3]')";
+$sql = "INSERT INTO postads(id_member,title,content,price,address,contact,category,user,time,img_1,img_2,img_3,img_4)
+  VALUES ('$id_member','$title','$content','$price','$address','$contact','$category','$user','$time','$img[0]','$img[1]','$img[2]','$img[3]')";
 
 
 
 
 	if ($conn->query($sql) === TRUE) {
+
+     echo "<meta http-equiv='refresh' content='0;url=http://localhost:8080/chosinhvien/index.php'>";
+     /*
 		echo "<div class='alert alert-success'> <span class='glyphicon glyphicon-ok'></span> Bài viết của bạn đã đăng tải thành công <a href='index.php' class='alert-link'>Quay lại trang chủ</a></div> ";
 
     echo "  <div class='panel-group'>
@@ -127,6 +132,8 @@ $sql = "INSERT INTO postads(email,title,content,price,address,contact,category,u
     ";// xem nội dung đã đăng
 
     include('footer.php');
+    */
+
 	} else {
 		echo "Error: " . $sql . "<br>" . $conn->error;
 	}
