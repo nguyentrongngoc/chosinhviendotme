@@ -1,12 +1,6 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
-<title>ChơsinhViên | Đăng kí tài khoản</title>
-<?php
-include('header.php');
-?>
+
 <body>
  <!------------------------- Menu bar & login -------------->
 
@@ -31,7 +25,7 @@ include('category_post.php');
 
 <!-- End Category -->
             
-            
+
 
 
 
@@ -53,7 +47,7 @@ include('category_post.php');
 
   <?php
 
- if (!isset($_SESSION['id_member'])) 
+ if (!isset($_SESSION['email'])) 
 { //chưa đăng nhập
      echo "";
 }
@@ -69,7 +63,7 @@ else
 
             <div class="col-md-8 col-md-offset-2 well well-sm">
     
-               <form data-toggle="validator" role="form" method="POST" action="signuppost.php">
+               <form data-toggle="validator" role="form" method="POST" action="">
 
                   <legend class="text-center active">  <label>Đăng kí tài khoản</label></legend>
 
@@ -84,20 +78,20 @@ else
 
                         <div class="form-group col-md-6">
                             <label for="last_name">Họ của bạn</label>
-                             <input  data-error="Vui lòng nhập họ của bạn" type="text" class="form-control" name="last_name" id="" placeholder="Nhập Họ" required>
+                             <input  data-error="Vui lòng nhập họ của bạn" type="text" class="form-control" name="last_name" id="last_name" placeholder="Nhập Họ" required>
                          <div class="help-block with-errors"></div>
                         </div>
 
                         <div class="form-group col-md-12">
                             <label for="">Email</label>
-                              <input data-error="Vui lòng nhập đúng định dạng email" type="email" class="form-control" name="email" id="" placeholder="Email" required>     
+                              <input data-error="Vui lòng nhập đúng định dạng email" type="email" class="form-control" name="email" id="email" placeholder="Email" required>     
                <div class="help-block with-errors"></div>
                         </div>
 
 
                         <div class="form-group col-md-12">
                             <label for="">Số điện thoại</label>
-                             <input data-minlength="10" type="number" data-error="Vui lòng nhập đúng số điên thoại" class="form-control" name="phone" id="" placeholder="Số điện thoại" required>    
+                             <input data-minlength="10" type="number" data-error="Vui lòng nhập đúng số điên thoại" class="form-control" name="phone" id="phone" placeholder="Số điện thoại" required>    
                <div class="help-block with-errors"></div>
                         </div>
 
@@ -157,7 +151,76 @@ else
     </div>
 
           <!------------------------- END Content -------------->
+        <!--xu ly ajax-->
+        <script language="javascript">
+             $('form').submit(function (){
+                    alert('Bạn đã click đăng ký');
+                    return false;
+                });
+            $('form').submit(function ()
+            {
+                // Xóa trắng thẻ div show lỗi
+                $('#showerror').html('');
             
+                var email = $('#email').val();
+                var first_name = $('#first_name').val();
+                var last_name = $('#last_name').val();
+                var phone = $('#phone').val();
+                var password = $('#password').val();
+                // Kiểm tra dữ liệu có null hay không
+                if ($.trim(email) == ''){
+                    alert('Bạn chưa nhập email');
+                    return false;
+                }
+                
+                // Nếu bạn thích có thể viết thêm hàm kiểm tra định dang email
+                // ở đây tôi làm chú yêu chỉ cách dùng ajax nên sẽ ko đề cập tới,
+                // vì sợ bài dài sẽ rối
+                
+                $.ajax({
+                    url : 'do_validate.php',
+                    type : 'post',
+                    dataType : 'json',
+                    data : {
+                        email : email,
+                        first_name : first_name,
+                        last_name : last_name,
+                        phone : phone,
+                        password : password
+                    },
+                    success : function (result)
+                    {
+                        // Kiểm tra xem thông tin gửi lên có bị lỗi hay không
+                        // Đây là kết quả trả về từ file do_validate.php
+                        if (!result.hasOwnProperty('error') || result['error'] != 'success')
+                        {
+                            alert('Có vẻ như bạn đang hack website của tôi');
+                            return false;
+                        }
+                        
+                        var html = '';
+                        
+                        // Lấy thông tin lỗi email
+                        if ($.trim(result.email) != ''){
+                            html += result.email;
+                        }
+                       
+                        // Cuối cùng kiểm tra xem có lỗi không
+                        // Nếu có thì xuất hiện lỗi
+                        if (html != ''){
+                            $('#showerror').append(html);
+                        }
+                        else {
+                            // Thành công
+                            $('#showerror').append('Thêm thành công');
+                        }
+                    }
+                });
+                
+                return false;
+            });
+            
+        </script>
       <!-- end container -->
 
   <!-- footer -->
