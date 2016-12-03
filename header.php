@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Chosinhvien.me | Kênh rao vặt dành cho Sinh Viên</title>
+
 
     <!-- Bootstrap Core CSS -->
     <link href="http://localhost:8080/chosinhvien/css/bootstrap.min.css" rel="stylesheet">
@@ -19,8 +19,12 @@
     <script src="http://localhost:8080/chosinhvien/js/bootstrap.min.js"></script>
  <script src="http://localhost:8080/chosinhvien/js/gotop.js"></script>
  <script src="http://localhost:8080/chosinhvien/js/validador.js"></script>
+    <script language="javascript" src="http://localhost:8080/chosinhvien/js/jquery-3.1.1.min.js" ></script>
+        <script language="javascript" src="http://localhost:8080/chosinhvien/js/ajax_index.js" ></script>
 
 <?php
 ///error_reporting(0); // chăn thông báo lỗi
 ?>
 </head>
+
+

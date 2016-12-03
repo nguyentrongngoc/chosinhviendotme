@@ -1,6 +1,13 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
+<?php
+include('../header.php');
+?>
 
 <body>
  <!------------------------- Menu bar & login -------------->
@@ -60,10 +67,28 @@ $data = mysqli_fetch_array($result);
 if (!$data)
     exit;
 
+function adddotstring($strNum) {
+ 
+        $len = strlen($strNum);
+        $counter = 3;
+        $result = "";
+        while ($len - $counter >= 0)
+        {
+            $con = substr($strNum, $len - $counter , 3);
+            $result = '.'.$con.$result;
+            $counter+= 3;
+        }
+        $con = substr($strNum, 0 , 3 - ($counter - $len) );
+        $result = $con.$result;
+        if(substr($result,0,1)=='.'){
+            $result=substr($result,1,$len+1);   
+        }
+        return $result;
 
-
+}
+$price=adddotstring($data['price']);  
+echo"<title>{$data['title']} ({$price} VNĐ)</title>";
     echo"
-
     <ol class = 'breadcrumb'>
    <li><a href = '../index.php'>Trang Chủ</a></li>
    <li><a href = '../filter/?category={$data['category']}'>{$data['category']}</a></li>
@@ -102,7 +127,7 @@ if (!$data)
                                 </div>
                                  <div class='item' style='max-height: 350px;'>
                                     <img class='slide-image' src='../{$data['img_4']}' alt=''>
-                                    <div class='carousel-caption trickcenter'><h4><span class ='label label-primary'>{$data['contact']} </span></h4></div>
+                                    <div class='carousel-caption trickcenter'><h4><span class ='label label-primary'>Liên hệ: {$data['contact']} </span></h4></div>
                                 </div>
                             </div>
                             <a class='left carousel-control' href='#carousel-example-generic' data-slide='prev'>
@@ -117,7 +142,7 @@ if (!$data)
 
 
                     <div class='caption-full'>
-                        <h4 class='pull-right' style='color:#a94442'> <strong>{$data['price']}  ₫</strong></h4>
+                        <h4 class='pull-right' style='color:#a94442'> <strong>$price  ₫</strong></h4>
                         <h4><a href='#'>{$data['title']}</a>
                         </h4>
                          <a style='color:#a94442' href='#' data-toggle='modal' data-target='#myModal' > <span class='glyphicon glyphicon-remove'></span> Xóa bài viêt này</a>
@@ -154,7 +179,7 @@ if (!$data)
                         <p>
                         Chuyên mục: <a href = '../filter/?category={$data['category']}'>{$data['category']}</a><br/>
                         Ngày đăng: {$data['time']}<br/>
-                            Người đăng: <a href = '../user/?email={$data['email']}'>{$data['user']}</a><br/>
+                            Người đăng: <a href = '../user/?id_member={$data['id_member']}'>{$data['user']}</a><br/>
                             Nơi đăng: {$data['address']}<br/>
                             Liên hệ: {$data['contact']}</p>
 
@@ -171,6 +196,24 @@ if (!$data)
 
                             <div class='clearfix'></div>
                        
+
+
+<div class='clearfix'> </div> 
+<!--
+<div id='fb-root'></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = '//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.8&appId=1242662602443457';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class='container'  style='width:100%;'>
+
+<div class='fb-comments' data-href='http://localhost:8080/chosinhvien/details/?id={$data['id']}' data-numposts='10' data-width='100%'>  </div></div>
+
+-->
+
                     </div>
                      
                     </div>

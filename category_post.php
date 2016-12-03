@@ -1,4 +1,5 @@
-  
+
+</br>  
     <p><a href="http://localhost:8080/chosinhvien/createpost.php" class="btn btn-success pull-right" style="margin-right:20px"><i class="  glyphicon glyphicon-send"></i>  Đăng Tin Miễn Phí</a>
     </p>
 <div class="clearfix"></div>
@@ -73,6 +74,7 @@
                     </span>  
                     </a>
                 </div>
+                 <div class="list-group hidden-md hidden-lg" ><i style="color:#2c3e50;"> * Nhấp Vào thanh Chuyên mục để xem thêm</i></div>
                 </div>
                  <!-- end mobile-->
                  
@@ -144,6 +146,7 @@
                 
                 </div>
                    </div>
+
                  <!-- end desktop-->
                  
                  

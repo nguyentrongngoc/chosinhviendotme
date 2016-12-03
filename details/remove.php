@@ -1,9 +1,12 @@
-
-
+<?php
+session_start();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
-
+<?php
+include('../header.php');
+?>
 <body>
  <!------------------------- Menu bar & login -------------->
 
@@ -35,33 +38,31 @@ include('../category_post.php');
             <div class="col-md-9">
    
 <?php
+  
 
-
-
-    session_start();
     include ('../connect.php');
     $id = $_GET['id'];
-    $email = $_SESSION['email'];
-    $sql = "SELECT *, id FROM postads WHERE id = $id";
+    $id_member = $_SESSION['id_member'];
+    $sql = "SELECT id,id_member FROM postads WHERE id = $id";
     $result = mysqli_query($conn, $sql);
     $data = mysqli_fetch_array($result);
     if (!$data){
          echo "<div class='alert alert-warning'> <span class='glyphicon glyphicon-floppy-remove'></span> Bài viết này không tồn tại hoặc đã bị xóa</div>  ";
-    include('footer.php');
+    include('../footer.php');
       exit();}
 
-    if ($data['email'] == $email)
+    if ($data['id_member'] == $id_member||$id_member=='12') //12: id của admin
     {   
         $sql = "DELETE FROM postads WHERE id = $id";
         $conn->query($sql);
          echo "<div class='alert alert-success'> <span class='glyphicon glyphicon-ok'></span> Đã xóa thành công bài viết của bạn</div>  ";
-    include('footer.php');
+    include('../footer.php');
     }
       else
       {
 
            echo "<div class='alert alert-danger'> <span class='glyphicon glyphicon-remove'></span> Bạn không có quyền xóa bài viết này</div>  ";
-    include('footer.php');
+    include('../footer.php');
 
       }
 

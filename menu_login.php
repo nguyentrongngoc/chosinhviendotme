@@ -9,6 +9,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
+        
       </button>
 
       
@@ -73,9 +74,6 @@
       </ul>
 	      <ul class="nav navbar-nav navbar-right">
 
-
-
-
 <?php
 
 //tiến hành kiểm tra là người dùng đã đăng nhập hay chưa
@@ -101,9 +99,6 @@ else
   }
 ?>
 
-
-
-
     </ul>
 	
     </div>
@@ -114,7 +109,7 @@ else
       <div class="input-group">
         <span class="input-group-form">
        
-        <select class="form-control" name="address" id="address"  style="width:35%">
+        <select class="form-control" name="address" id="address"  style="width:25%;border-top-left-radius: 4px;border-bottom-left-radius: 4px;">
                                       <option value="TP.HCM">TP.HCM</option>
                                       <option value="ĐH CNTT">ĐH Công nghệ thông tin</option>
                                       <option value="ĐH CNTT">ĐH Công nghệ thông tin</option>
@@ -145,7 +140,7 @@ else
                                       <option value="Quận B.Tân">Quận Bình Tân</option>
                             </select>
        </span>
-      <input  style="width:65%" data-error="Vui lòng nhập từ khóa muốn tìm kiếm" type="text" class="form-control" name="keyword" placeholder="Bạn muốn tìm gì..."  required/>
+      <input  style="width:75%" data-error="Vui lòng nhập từ khóa muốn tìm kiếm" type="text" class="form-control" name="keyword" placeholder="Bạn muốn tìm gì..."  required/>
       <span class="input-group-btn">
         <button  class="btn btn-default" type="submit">  <i class="glyphicon glyphicon-search"></i></button>
       

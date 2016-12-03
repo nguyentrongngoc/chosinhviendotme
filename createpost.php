@@ -1,5 +1,12 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
+<title>ChơsinhViên | Đăng tin</title>
+<?php
+include('header.php');
+?>
 <body>
  <!------------------------- Menu bar & login -------------->
 
@@ -37,7 +44,7 @@ include('category_post.php');
  
  
 
- if (!isset($_SESSION['email'])) 
+ if (!isset($_SESSION['id_member'])) 
 { //chưa đăng nhập
      echo "<div class='alert alert-warning'> <span class='glyphicon glyphicon-remove'></span> Bạn chưa đăng nhập,hãy đăng nhâp để đăng tin rao vặt</a>
      <br/><span class='glyphicon glyphicon-pencil'></span> Nếu bạn chưa là thành viên hãy  <a href='signup.php' class='alert-link'> đăng kí thành viên tại đây </a></div>";
@@ -64,12 +71,13 @@ include('category_post.php');
                   echo ' ';
                   echo $_SESSION['last_name'];?>" />
 
-              <input type="hidden" name="email" value="<?php     
-                  echo $_SESSION['email'];?>" />
+              <input type="hidden" name="id_member" value="<?php     
+                  echo $_SESSION['id_member'];?>" />
 
              <input type="hidden" name="time" value="<?php
+                    date_default_timezone_set('Asia/Ho_Chi_Minh');
                     $t=time();
-                    echo(date("h:i Y-m-d",$t));
+                    echo(date("Y-m-d h:i",$t));
                     ?>" />
 
 
@@ -130,29 +138,36 @@ include('category_post.php');
 
 
                         <div class="form-group col-md-6">
-                            <label for="country">Quận/Huyện</label>
+                            <label for="country">Quận/Trường ĐH</label>
                             <select class="form-control" name="address" id="address">
-                              <option>Quận 1</option>
-                              <option>Quận 2</option>
-                              <option>Quận 3</option>
-                              <option>Quận 4</option>
-                              <option>Quận 5</option>
-                              <option>Quận 6</option>
-                              <option>Quận 7</option>
-                              <option>Quận 8</option>
-                              <option>Quận 9</option>
-                              <option>Quận 10</option>
-                              <option>Quận 11</option>
-                              <option>Quận 12</option>
-                              <option>Quận Thủ Đức</option>
-                              <option>Quận Gò Vấp</option>
-                              <option>Quận Bình Thạnh</option>
-                              <option>Quận Tân Bình</option>
-                              <option>Quận Tân Phú</option>
-                              <option>Quận Phú Nhuận</option>
-                              <option>Quận Bình Tân</option>
+                                      <option value="ĐH CNTT">ĐH Khoa Công nghệ thông tin</option>
+                                      <option value="ĐH KHXHNV">ĐH Khoa học Xã hội và Nhân văn</option>
+                                      <option value="ĐH B.Khoa">ĐH Bách Khoa</option>
+                                      <option value="ĐH KHTN">ĐH Khoa học Tự nhiên</option>
+                                      <option value="ĐH Q.Tế">ĐH Khoa Quốc tế</option>
+                                      <option value="ĐH KTLuật" >ĐH Kinh Tế Luật</option>
+                                      <option value="KHoa Y">Khoa Y</option>
+                                      <option value="Quận 1">Quận 1</option>
+                                      <option value="Quận 2">Quận 2</option>
+                                      <option value="Quận 3">Quận 3</option>
+                                      <option value="Quận 4">Quận 4</option>
+                                      <option value="Quận 5">Quận 5</option>
+                                      <option value="Quận 6">Quận 6</option>
+                                      <option value="Quận 7">Quận 7</option>
+                                      <option value="Quận 8">Quận 8</option>
+                                      <option value="Quận 9">Quận 9</option>
+                                      <option value="Quận 10">Quận 10</option>
+                                      <option value="Quận 11">Quận 11</option>
+                                      <option value="Quận 12">Quận 12</option>
+                                      <option value="Quận T.Đức">Quận Thủ Đức</option>
+                                      <option value="Quận G.Vấp">Quận Gò Vấp</option>
+                                      <option value="Quận B.Thạnh">Quận Bình Thạnh</option>
+                                      <option value="Quận T.Bình">Quận Tân Bình</option>
+                                      <option value="Quận T.Phú">Quận Tân Phú</option>
+                                      <option value="Quận P.Nhuận">Quận Phú Nhuận</option>
+                                      <option value="Quận B.Tân">Quận Bình Tân</option>
 
-                    
+                            
                     
                             </select>
                         </div>

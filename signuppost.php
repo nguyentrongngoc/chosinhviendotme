@@ -4,7 +4,7 @@ session_start();
 
 <!DOCTYPE html>
 <html lang="en">
-
+<title>ChơsinhViên | Đăng kí tài khoản</title>
 <?php
 include('header.php');
 ?>
@@ -98,7 +98,8 @@ else
 	VALUES ('$first_name','$last_name','$email','$phone','$password')";
 
 	if ($conn->query($sql) === TRUE) {
-		echo "<div class='alert alert-success'> <span class='glyphicon glyphicon-ok'></span> Xin chúc mừng bạn thành công tài khoản <b>$email</b> <br/>Hãy đăng nhập ngay bên dưới</div><div class='modal-dialog'>  <div class='loginmodal-container'>    <h1>Đăng nhập</h1><br>    <form method='POST' action='loginpost.php'>    <input type='text' name='email' placeholder='Email'>    <input type='password' name='password' placeholder='Mật khẩu'><span style='color:red'></span>    <input type='submit' class='login loginmodal-submit' value='Đăng nhập'>    </form> </div></div>  ";
+		echo "<div class='alert alert-success'> <span class='glyphicon glyphicon-ok'></span> Xin chúc mừng bạn thành công tài khoản <b>$email</b> <br/>Hãy đăng nhập ngay bên dưới</div><div class='modal-dialog'>  <div class='loginmodal-container'>    <h1>Đăng nhập</h1><br>    <form method='POST' action='loginpost.php'>    <input type='text' name='email' placeholder='Email'>    <input type='password' name='password' placeholder='Mật khẩu'><span style='color:red'></span>    <input type='submit' class='btn btn-primary' value='Đăng nhập'>    </form> </div></div>  ";
+    
     include('footer.php');
 	} else {
 		echo "Error: " . $sql . "<br>" . $conn->error;

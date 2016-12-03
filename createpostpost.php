@@ -3,7 +3,7 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
+<title>ChơsinhViên | Đăng tin</title>
 <?php
 include('header.php');
 ?>
