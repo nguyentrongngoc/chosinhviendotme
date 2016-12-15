@@ -55,16 +55,18 @@ include('category_post.php');
                                 <div class="item active">
                                     <img class="slide-image" src="img/banner/job.jpg" alt="">
                                     <div class="carousel-caption trickcenter">
-<h3><span class ="label label-primary">Tìm kiếm việc làm thêm ..</span></h3>
+                                    <h3><span class ="label label-primary">Tìm kiếm việc làm thêm ..</span></h3>
     </div>
                                 </div>
                                 <div class="item">
                                     <img class="slide-image" src="img/banner/phone.jpg" alt="">
-                                    <div class="carousel-caption trickcenter"><h3><span class ="label label-success">Mua/bán điện thoại cũ ..</span></h3></div>
+                                    <div class="carousel-caption trickcenter">
+                                    <h3><span class ="label label-primary">Bán điện thoại cũ ..</span></h3></div>
                                 </div>
                                 <div class="item">
-                                    <img class="slide-image" src="img/banner/fashion.jpg" alt="">
-                                    <div class="carousel-caption trickcenter"><h3><span class ="label label-warning">Mua/bán quần áo cũ..</span></h3>
+                                    <img class="slide-image" src="img/banner/room.jpg" alt="">
+                                    <div class="carousel-caption trickcenter">
+                                    <h3><span class ="label label-primary">Tìm người ở ghép..</span></h3>
                                 </div></div>
                             </div>
                             <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
@@ -84,13 +86,13 @@ include('category_post.php');
 
 
                 <div id="content">
-            <?php require('data.php'); ?>
+            <?php require('loadingpost.php'); ?>
         </div>
         <div id="loadding" class="hidden">
         <div class='clearfix'></div>
-
-        <label class="btn btn-success btn-md"><span class="glyphicon glyphicon-refresh fast-right-spinner" ></span> Đang tải thêm bài viết...</label>
-      
+  
+        <center><label class="btn btn-success btn-md" style="margin-top:10px"><span class="glyphicon glyphicon-refresh fast-right-spinner" ></span> Đang tải thêm bài viết...</label></center>
+   
         </div>
 
 
