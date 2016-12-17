@@ -55,8 +55,7 @@ include('header.php');
                 <h3>Thầy Tín Trình
                    
                 </h3>
-                <p>Người hướng dẫn & Founder
-				<br/>chomayanh.net,chietkhau.net,1deal.info,ongkinhgiare</p>
+                <p>Thầy hướng dẫn
 				</center>
             </div>
         <div class="clearfix"></div>

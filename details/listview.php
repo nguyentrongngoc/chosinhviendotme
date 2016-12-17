@@ -9,18 +9,9 @@
                     <div class='row product-box'>
                            
                             <div class='col-xs-8 col-sm-8 col-md-8 col-lg-8'>
-                                <p><small><a style='color:black' href='../details/?id={$data['id']}' >"
+                                <p><small><a style='color:black' href='../details/?id={$data['id']}' >
 
-                              ;
-
-
-                                  if ($data['address']=='ĐH CNTT'||$data['address']=='ĐH B.Khoa'||$data['address']=='ĐH KHTN'||$data['address']=='ĐH KHXHNV'||$data['address']=='ĐH Q.Tế'||$data['address']=='ĐH KTLuật'||$data['address']=='KHoa Y')
-                                      echo "<span class='label label-danger'>{$data['address']}</span>";
-                                    else
-                                      echo "<span class='label label-success'>{$data['address']}</span>";
-
-  echo"                              
-
+                                 <span class='label label-success'>{$data['address']}</span>
 
 
 
@@ -66,18 +57,12 @@ echo "
                                </center> 
                             </div>
                             <div class='col-xs-9 col-sm-9 col-md-9 col-lg-9'>
-                                <p><small><a style='color:black' href='../details/?id={$data['id']}' >";
+                                <p><small><a style='color:black' href='../details/?id={$data['id']}' >
 
 
+                                     <span class='label label-success'>{$data['address']}</span>
 
-                                  if ($data['address']=='ĐH CNTT'||$data['address']=='ĐH B.Khoa'||$data['address']=='ĐH KHTN'||$data['address']=='ĐH KHXHNV'||$data['address']=='ĐH Q.Tế'||$data['address']=='ĐH KTLuật'||$data['address']=='KHoa Y')
-                                      echo "<span class='label label-danger'>{$data['address']}</span>";
-                                    else
-                                      echo "<span class='label label-success'>{$data['address']}</span>";
-
-
-
-echo "                                <strong> {$data['title']}</strong></a></small><br/>
+                              <strong> {$data['title']}</strong></a></small><br/>
                               <small>Ngày đăng: {$data['time']}</small><br/>
                                 <small>Người bán: <a href = '../user/?id_member={$data['id_member']}'>{$data['user']}</a></small><br/>
                                 <small class='navigation'>Chuyên Mục: <a href = '../filter/?category={$data['category']}'>{$data['category']}</a></small><br/>

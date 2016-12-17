@@ -1,127 +1,50 @@
 <?php
-session_start();
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<title>ChơsinhViên | Đăng kí tài khoản</title>
-<?php
-include('header.php');
-?>
-
-<body>
- <!------------------------- Menu bar & login -------------->
-
-<?php
-include('menu_login.php');
-?>
-    
-        <!------------------------- End Menu Bar & login -------------->
-    
-    
-         <!-- Start container --> 
-    
-      <div class="container">
-          <div class="row">
-
-<!-- Category -->
-<?php
-include('category_post.php');
-?> 
-<!-- end Category -->
-
-
-<!-- End Category -->
-            
-              
-                 <div class="col-md-9">
-  
-            
-           <!----------------------- Content -------------->
-            
-
-<?php
-
- if (!isset($_SESSION['id_member'])) 
-{ //chưa đăng nhập
-     echo "";
-    
+// Lấy thông tin username và email
+    $email              = isset($_POST['email']) ? $_POST['email'] : false;
+    $first_name         = isset($_POST['first_name']) ? $_POST['first_name'] : false;
+    $last_name          = isset($_POST['last_name']) ? $_POST['last_name'] : false;
+    $phone              = isset($_POST['phone']) ? $_POST['phone'] : false;
+    $password           = isset($_POST['password']) ? $_POST['password'] : false;
+// Nếu cả hai thông tin username và email đều không có thì dừng, thông báo lỗi
+if (!$email){
+    die ('{error:"bad_request"}');
 }
-else
-  { //đã đăng nhâp
-    echo "<div class='alert alert-success'> <span class='glyphicon glyphicon-ok'></span> Bạn đã đăng nhập thành công <a href='index.php' class='alert-link'>Quay lại trang chủ</a></div>  ";
-      include('footer.php');
-    exit;
-    
-  }
 
-  
-  include('connect.php');
-   
-	$first_name			= $_POST["first_name"];
-	$last_name  		= $_POST["last_name"];
-	$email   			= $_POST["email"];
-	$phone      		= $_POST["phone"];
-	$password			= $_POST["password"];
-	$confirm_password 	= $_POST["confirm_password"];
+// Kết nối database
 
+$conn = mysqli_connect('localhost', 'root', '', 'chosinhvien') or die ('{error:"bad_request"}');
+mysqli_query($conn,"SET NAMES 'UTF8'");
+// Khai báo biến lưu lỗi
+$error = array(
+    'error' => 'success',
+    'email' => ''
+);
+$check = 0;
+// Kiểm tra tên email
+if ($email)
+{
+    $query = mysqli_query($conn, "select count(*) as count from member where email = '$email'");
 
-
-  //Kiểm tra điền thông tin đầy đủ
-  if ($first_name  == "" || $last_name == "" || $email == "" || $phone== "" || $password == ""|| $confirm_password  == "")
-    {
-        print "<div class='alert alert-warning alert-dismissable'>     <a href='javascript:history.go(-1)' class='close' data-dismiss='alert' aria-label='close'>×</a> <strong><span class='glyphicon glyphicon-remove'></span> Lỗi!</strong> Xin vui lòng nhập đầy đủ các thông tin. <a href='index.php' class='alert-link'>Quay trờ lại trang chủ</a> </div> ";
-        include('footer.php');
-        exit;
+    if ($query){
+        $row = mysqli_fetch_array($query, MYSQLI_ASSOC);
+        if ((int)$row['count'] > 0){
+            $error['email'] = 'Email đã tồn tại vui lòng chọn email khác';
+            $check = 1;
+        }
     }
-
-  $sql = "SELECT email FROM member WHERE email='$email'";
-    $result = mysqli_query($conn, $sql);
-    $data = mysqli_fetch_array($result);
-
-    //Kiểm tra tên đăng nhập có tồn tại không?
-    if ($data['email'] == $email ){ 
-        echo " <div class='alert alert-danger alert-dismissable'>    <a href='javascript:history.go(-1)' class='close' data-dismiss='alert' aria-label='close'>×</a>  <strong><span class='glyphicon glyphicon-remove'></span> Lỗi !</strong> Tên Email này đã có người dùng hãy sử dụng email khác. <a href='javascript:history.go(-1)' class='alert-link'>Nhấp vào đây để quay trở lại</a> </div>";
-        include('footer.php');
-        exit;
+    else{
+        die ('{error:"bad_request"}');
     }
+}
 
 
-
-
-
-	$password = md5($password);
-
-	//đăng kí thành công
-
-	$sql = "INSERT INTO member(first_name,last_name,email,phone,password)
-	VALUES ('$first_name','$last_name','$email','$phone','$password')";
-
-	if ($conn->query($sql) === TRUE) {
-		echo "<div class='alert alert-success'> <span class='glyphicon glyphicon-ok'></span> Xin chúc mừng bạn thành công tài khoản <b>$email</b> <br/>Hãy đăng nhập ngay bên dưới</div><div class='modal-dialog'>  <div class='loginmodal-container'>    <h1>Đăng nhập</h1><br>    <form method='POST' action='loginpost.php'>    <input type='text' name='email' placeholder='Email'>    <input type='password' name='password' placeholder='Mật khẩu'><span style='color:red'></span>    <input type='submit' class='btn btn-primary' value='Đăng nhập'>    </form> </div></div>  ";
-    
-    include('footer.php');
-	} else {
-		echo "Error: " . $sql . "<br>" . $conn->error;
-	}
-
-	$conn->close();
-
+// Tiến hành lưu vào CSDL
+if ($check == 0) {
+    $password=md5($password);
+$sql = "INSERT INTO member(first_name,last_name,email,phone,password)
+    VALUES ('$first_name','$last_name','$email','$phone','$password')";
+$conn->query($sql);
+}
+// Trả kết quả về cho client
+die (json_encode($error));
 ?>
-
-
-
-
-
-
-            </div>
-
-        </div>
-
-    </div>
-  
-
-
-</body>
-
-</html>

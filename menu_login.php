@@ -12,8 +12,9 @@
         
       </button>
 
-      
-    <a class="navbar-brand" href="http://localhost:8080/chosinhvien/index.php"><span class="glyphicon glyphicon-shopping-cart"></span>  Chợsinhviên.me</a>
+
+
+    <a class="navbar-brand" href="http://localhost:8080/chosinhvien/index.php"><span class="glyphicon glyphicon-map-marker"></span> Chợsinhviên.me</a>
 	
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#search">
      <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
@@ -27,11 +28,16 @@
                     </li>
 				
 						
-						<!-- Search bar PC -->
-         <form   data-toggle="validator" class="navbar-form navbar-right hidden-sm hidden-xs" role="search" action="http://localhost:8080/chosinhvien/search" method="GET">
+						<!-- Search bar PC  -->
+
+        
+
+    
+         <form   style="width:50%" data-toggle="validator" class="navbar-form navbar-left hidden-sm hidden-xs" role="search" action="http://localhost:8080/chosinhvien/search" method="GET">
       <div class="input-group">
-      <span class="input-group-btn">
-        <select class="form-control" style='max-width:20%;' name="address" id="address">
+       <span class="input-group-btn">
+       
+         <select class="form-control" name="address" id="address"  style="width:150px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;">
                                       <option value="TP.HCM">TP.HCM</option>
                                       <option value="ĐH CNTT">ĐH Công nghệ thông tin</option>
                                       <option value="ĐH CNTT">ĐH Công nghệ thông tin</option>
@@ -61,18 +67,25 @@
                                       <option value="Quận P.Nhuận">Quận Phú Nhuận</option>
                                       <option value="Quận B.Tân">Quận Bình Tân</option>
                             </select>
-      <input type="text" class="form-control" style="width:275px" name="keyword" placeholder="Bạn muốn tìm gì.."  required/>
+        </span>
       
-        <button class="btn btn-default" style='border-top-right-radius: 4px;border-bottom-right-radius: 4px;' type="submit">  <i class="glyphicon glyphicon-search"></i> Tìm kiếm</button>
-      </span>
+         
+      <input type="text" style="width: 300px" class="form-control" name="keyword" placeholder="Bạn muốn tìm gì.."  required/>
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="submit">Tìm kiếm</button>
+        </span>
+
       </div>
       </form>
-	  
+
 
 <!-- Search bar PC -->
 	
       </ul>
 	      <ul class="nav navbar-nav navbar-right">
+
+
+
 
 <?php
 
@@ -80,22 +93,57 @@
 //nếu chưa, chuyển hướng người dùng ra lại trang đăng nhập
 if (!isset($_SESSION['id_member'])) 
 { //chưa đăng nhập
-     echo "      <li><a href='http://localhost:8080/chosinhvien/signup.php'><span class='glyphicon glyphicon-pencil'></span> Đăng kí</a></li>
-      <li>
-    <a href='#' data-toggle='modal' data-target='#login-modal'> <span class='glyphicon glyphicon-user'></span> Đăng nhập</a></li>";
+     echo "      <li class='dropdown'>
+          <a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'> <span class='glyphicon glyphicon-flag'></span> Tài khoản <span class='caret'></span></a>
+          <ul class='dropdown-menu'>
+ <li><a href='http://localhost:8080/chosinhvien/signup.php'><span class='glyphicon glyphicon-pencil'></span> Đăng kí</a></li>
+   <li> <a href='#' data-toggle='modal' data-target='#login-modal'> <span class='glyphicon glyphicon-user'></span> Đăng nhập</a></li>
+          </ul>
+        </li>
+";
 }
 else
-  { //đã đăng nhâp
-    echo " <li><a href='http://localhost:8080/chosinhvien/user/?id_member=";
-    echo $_SESSION['id_member'];
-    echo "'> <span class='glyphicon glyphicon-user'></span> ";
+  { //chưa đăng nhập
+    if(isset($_GET['logout'])){
+    if ($_GET['logout'] == "yes")
+    {
+      if (isset($_SESSION['id_member']))
+          unset($_SESSION['id_member']); // xóa session login
+      echo "  <li class='dropdown'>
+          <a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'> <span class='glyphicon glyphicon-flag'></span> Tài khoản <span class='caret'></span></a>
+          <ul class='dropdown-menu'>
+ <li><a href='http://localhost:8080/chosinhvien/signup.php'><span class='glyphicon glyphicon-pencil'></span> Đăng kí</a></li>
+   <li> <a href='#' data-toggle='modal' data-target='#login-modal'> <span class='glyphicon glyphicon-user'></span> Đăng nhập</a></li>
+          </ul>
+        </li>
+";
+            
+    }}
+    else//đã đăng nhập
+    {
+      include('connect.php');
+      $id_member=$_SESSION['id_member'];
+      $sql = "SELECT *, id FROM member WHERE id='$id_member'";
+      $result = mysqli_query($conn, $sql);
+      $data = mysqli_fetch_array($result);
+            echo " <li class='dropdown'>
+          <a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'> <span class='glyphicon glyphicon-user'></span> {$data['first_name']} {$data['last_name']} <span class='caret'></span></a><ul class='dropdown-menu'>";
 
-    echo $_SESSION['first_name'];
-    echo ' ';
-    echo $_SESSION['last_name'];
-    echo "<li><a href='http://localhost:8080/chosinhvien/logout.php'><span class='glyphicon glyphicon-off'></span> Đăng Xuất</a></li>";
+            
+            echo"<li><a href='http://localhost:8080/chosinhvien/user/?id_member={$data['id']}''><span class='glyphicon glyphicon-comment'></span> Bài đăng của bạn</li>";
 
-    
+
+            echo"<li><a href='http://localhost:8080/chosinhvien/user/editprofile.php?id_member={$data['id']}''><span class='glyphicon glyphicon-pencil'></span> Cập nhật thông tin/mật khẩu</a></li>";
+
+
+       if (($_SESSION['id_member'])==12)
+       {
+        echo"<li><a href='http://localhost:8080/chosinhvien/admin/postads.php'><span class='glyphicon glyphicon-bookmark'></span> Quản lý bài đăng</a></li>";
+        echo"<li><a href='http://localhost:8080/chosinhvien/admin/member.php'><span class='glyphicon glyphicon-cog'></span> Quản lý thành viên</a></li>";
+      }
+      echo"<li><a href='http://localhost:8080/chosinhvien/index.php?logout=yes'><span class='glyphicon glyphicon-off'></span> Đăng Xuất</a></li>";
+      echo"</ul></li>";
+    }
   }
 ?>
 
@@ -169,11 +217,12 @@ else
     	  <div class="modal-dialog">
 				<div class="loginmodal-container">
 					<h1>Đăng nhập</h1><br>
-				  <form method="POST" action="http://localhost:8080/chosinhvien/loginpost.php">
-					<input type="text" name="email" placeholder="Email"  >
+				  <form  data-toggle="validator" role="form" method="POST" action="http://localhost:8080/chosinhvien/loginpost.php">
+					<input type="text" name="email" placeholder="Email" required>
 
 
-					<input type="password" name="password" placeholder="Mật khẩu">
+					<input type="password" name="password" placeholder="Mật khẩu" required>
+          
 					<input type="submit" class="btn btn-primary" value="Đăng nhập">
 				  </form>
 					
@@ -187,3 +236,5 @@ else
 	
 	    <!------------------------- END Header -------------->
 	
+
+

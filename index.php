@@ -91,8 +91,9 @@ include('category_post.php');
         <div id="loadding" class="hidden">
         <div class='clearfix'></div>
   
-        <center><label class="btn btn-success btn-md" style="margin-top:10px"><span class="glyphicon glyphicon-refresh fast-right-spinner" ></span> Đang tải thêm bài viết...</label></center>
-   
+        <center><label id="loadingon" class="btn btn-success btn-md" style="margin-top:10px"><span class="glyphicon glyphicon-refresh fast-right-spinner" ></span> Đang tải thêm bài viết...</label>
+
+        </center>";
         </div>
 
 

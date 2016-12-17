@@ -1,7 +1,9 @@
 
 </br>  
-    <p><a href="http://localhost:8080/chosinhvien/createpost.php" class="btn btn-success pull-right" style="margin-right:20px"><i class="  glyphicon glyphicon-send"></i>  Đăng Tin Miễn Phí</a>
+    <p><a href="http://localhost:8080/chosinhvien/createpost.php" class="btn btn-success pull-right hidden-sm hidden-xs" style="margin-right:20px"><i class="  glyphicon glyphicon-send"></i>  Đăng Tin Miễn Phí</a>
+            <a href="http://localhost:8080/chosinhvien/createpost.php" class="btn btn-sm btn-success pull-right hidden-lg hidden-md" style="margin-right:20px"><i class="  glyphicon glyphicon-send"></i>  Đăng Tin Miễn Phí</a>
     </p>
+
 <div class="clearfix"></div>
 <hr/>
 

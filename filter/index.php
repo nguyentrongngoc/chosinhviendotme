@@ -57,22 +57,19 @@ include('../category_post.php');
 
 
 
-
           <?php
 include('../connect.php');
 $category = $_GET['category'];
 
-
-$sql = "SELECT * FROM postads WHERE category='$category'";
-$result = mysqli_query($conn, $sql);
 
 echo"<title>Chơsinhvien.me | $category</title>";
 echo "
  <ol class = 'breadcrumb'>
    <li><a href = '../index.php'>Trang Chủ</a></li>
    <li>Chuyên mục: $category</li>
-</ol>
-";
+</ol>";
+
+
 
 function adddotstring($strNum) {
  
@@ -97,9 +94,12 @@ function adddotstring($strNum) {
 
  
                 $display = 10;
-                $query = "SELECT COUNT(id) FROM postads WHERE category='$category'";
+                $query = "SELECT COUNT(id) FROM postads WHERE category='$category' order by id desc";
+
                 $result = mysqli_query($conn,$query);
+
                 $rows = mysqli_fetch_array($result);
+
                 $record = $rows[0];
                 $current = '';
                 if($record > $display) {
@@ -134,18 +134,24 @@ function adddotstring($strNum) {
  
                 $query_data = "SELECT *,id FROM postads
                                WHERE category='$category'
-                               ORDER BY id 
+                               order by id desc
                                LIMIT $start, $display";
                 $result_data = mysqli_query($conn,$query_data);
-
+                $kt=0;
+               
       
                 while($data = mysqli_fetch_array($result_data)) {
-                    
                     $price=adddotstring($data['price']);  
-                  $data['content'] = substr($data['content'],0,300);
+                  $data['content'] = mb_substr($data['content'],0,300,'UTF-8');
                   include('../details/listview.php');
+                  $kt=1;
                 }
-           
+                if($kt==0)
+                {
+                    echo"<i style='color:red'>*Không có bài viết nào trong chuyên mục này</i>";
+                    include('../footer.php');
+                    exit;
+                }
         
                   echo"<div class='clearfix'></div><ul class='pagination pagination-sm pull-right'>";
                 if($page > 1) {

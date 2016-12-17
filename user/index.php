@@ -62,22 +62,17 @@ include('../category_post.php');
 include('../connect.php');
 $id = $_GET['id_member'];
 
-$sql = "SELECT * FROM postads WHERE id_member='$id'";
+$sql = "SELECT first_name,last_name FROM member WHERE id='$id'";
 $result = mysqli_query($conn, $sql);
-if (!$result)
-{
-    echo "Danh Mục Trống";
-    exit();
-}
 
 $resultuser = mysqli_query($conn, $sql);
 $datauser = mysqli_fetch_array($resultuser);
 
-echo"<title>Chơsinhvien.me | Gian hàng {$datauser['user']}</title>";
+echo"<title>Chơsinhvien.me | Gian hàng {$datauser['first_name']} {$datauser['last_name']} </title>";
 echo "
  <ol class = 'breadcrumb'>
    <li><a href = '../index.php'>Trang Chủ</a></li>
-   <li>Bài đăng của {$datauser['user']}</li>
+   <li>Bài đăng của {$datauser['first_name']} {$datauser['last_name']} </li>
 </ol>
 ";
 
@@ -104,7 +99,7 @@ function adddotstring($strNum) {
 
  
                 $display = 10;
-                $query = "SELECT COUNT(id) FROM postads WHERE id_member='$id'";
+                $query = "SELECT COUNT(id) FROM postads WHERE id_member='$id' order by id desc";
                 $result = mysqli_query($conn,$query);
                 $rows = mysqli_fetch_array($result);
                 $record = $rows[0];
@@ -141,19 +136,24 @@ function adddotstring($strNum) {
  
                 $query_data = "SELECT *,id FROM postads
                                WHERE id_member='$id'
-                               ORDER BY id 
+                                order by id desc
                                LIMIT $start, $display";
                 $result_data = mysqli_query($conn,$query_data);
-
-      
+                $kt=0;
                 while($data = mysqli_fetch_array($result_data)) {
                     
                     $price=adddotstring($data['price']);  
-                  $data['content'] = substr($data['content'],0,300);
+                  $data['content'] =mb_substr($data['content'],0,300,'UTF-8');
                   include('../details/listview.php');
+                  $kt=1;
                 }
            
-        
+                if($kt==0)
+                {
+                    echo"<i style='color:red'>*Thành viên này chưa có bài đăng nào</i>";
+                    include('../footer.php');
+                    exit;
+                }
                   echo"<div class='clearfix'></div><ul class='pagination pagination-sm pull-right'>";
                 if($page > 1) {
                     if ($current > 1) {

@@ -86,9 +86,10 @@ function adddotstring($strNum) {
         return $result;
 
 }
-$price=adddotstring($data['price']);  
-echo"<title>{$data['title']} ({$price} VNĐ)</title>";
-    echo"
+$price=adddotstring($data['price']); 
+$content=nl2br($data['content']);
+echo"<title>{$data['title']} ({$price} VNĐ)</title>
+  
     <ol class = 'breadcrumb'>
    <li><a href = '../index.php'>Trang Chủ</a></li>
    <li><a href = '../filter/?category={$data['category']}'>{$data['category']}</a></li>
@@ -143,15 +144,15 @@ echo"<title>{$data['title']} ({$price} VNĐ)</title>";
 
                     <div class='caption-full'>
                         <h4 class='pull-right' style='color:#a94442'> <strong>$price  ₫</strong></h4>
-                        <h4><a href='#'>{$data['title']}</a>
-                        </h4>
-                         <a style='color:#a94442' href='#' data-toggle='modal' data-target='#myModal' > <span class='glyphicon glyphicon-remove'></span> Xóa bài viêt này</a>
+                        <h4><a href='#'>{$data['title']}</a>";
 
+                              if (!isset($_SESSION['id_member']))
+                                echo "";
+                                  elseif ($_SESSION['id_member']==$data['id_member']||$_SESSION['id_member']=='12')
+                                echo"
+                                   <!---------- Xóa bài viết----------->
+                                         <br/><a style='color:#a94442;font-size:15px' href='#' data-toggle='modal' data-target='#myModal' > <span class='glyphicon glyphicon-remove'></span> Xóa bài viêt này</a>
 
-
-
-                               <!---------- Xóa bài viết----------->
-                                
 
                                     <div class='modal fade' id='myModal' role='dialog'>
                                       <div class='modal-dialog'>
@@ -173,33 +174,39 @@ echo"<title>{$data['title']} ({$price} VNĐ)</title>";
                                         
                                       </div>
                                     </div>
-                     <!----------------------- Xóa bài viết----------->
-
+                                        <!----------------------- Xóa bài viết----------->
+                                    ";
+                 
+                  echo"      </h4>
+        
 
                         <p>
+                              Ngày đăng: {$data['time']}<br/>
                         Chuyên mục: <a href = '../filter/?category={$data['category']}'>{$data['category']}</a><br/>
-                        Ngày đăng: {$data['time']}<br/>
                             Người đăng: <a href = '../user/?id_member={$data['id_member']}'>{$data['user']}</a><br/>
                             Nơi đăng: {$data['address']}<br/>
-                            Liên hệ: {$data['contact']}</p>
+                            <strong>Liên hệ</strong> {$data['contact']}<br/><br/>
 
-                        <p>Mô tả: {$data['content']}</p><br/><br/><br/>
+                           $content</p><br/><br/><br/>
                    <div class='clearfix'></div>
-                   <div class=' col-lg-9 col-md-9 col-sm-10 col-xs-12' >
-                       
-                        
-                         <img class='img-responsive' src='../{$data['img_4']}'><br/>
-                         <img class='img-responsive' src='../{$data['img_3']}'><br/>
-                       <img class='img-responsive' src='../{$data['img_2']}'><br/>
-                          <img class='img-responsive' src='../{$data['img_1']}'><br/>
-</div>
+                   <div class=' col-lg-9 col-md-9 col-sm-10 col-xs-12' >";
+                      if($data['img_4']!='data/default-image.jpg')
+                        echo"<img class='img-responsive' src='../{$data['img_4']}'><br/>";
+                      if($data['img_3']!='data/default-image.jpg')
+                        echo"<img class='img-responsive' src='../{$data['img_3']}'><br/>";
+                      if($data['img_2']!='data/default-image.jpg')
+                        echo"<img class='img-responsive' src='../{$data['img_2']}'><br/>";
+                      if($data['img_1']!='data/default-image.jpg')
+                        echo"<img class='img-responsive' src='../{$data['img_1']}'><br/>";
+                      
+                  echo"</div>
 
                             <div class='clearfix'></div>
                        
 
 
 <div class='clearfix'> </div> 
-<!--
+
 <div id='fb-root'></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -212,7 +219,7 @@ echo"<title>{$data['title']} ({$price} VNĐ)</title>";
 
 <div class='fb-comments' data-href='http://localhost:8080/chosinhvien/details/?id={$data['id']}' data-numposts='10' data-width='100%'>  </div></div>
 
--->
+
 
                     </div>
                      

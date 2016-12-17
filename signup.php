@@ -1,6 +1,12 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
-
+<title>ChơsinhViên | Đăng kí tài khoản</title>
+<?php
+include('header.php');
+?>
 <body>
  <!------------------------- Menu bar & login -------------->
 
@@ -25,8 +31,7 @@ include('category_post.php');
 
 <!-- End Category -->
             
-
-
+            
 
 
 
@@ -47,7 +52,7 @@ include('category_post.php');
 
   <?php
 
- if (!isset($_SESSION['email'])) 
+ if (!isset($_SESSION['id_member'])) 
 { //chưa đăng nhập
      echo "";
 }
@@ -59,11 +64,10 @@ else
     
   }
 ?>
-
-
-            <div class="col-md-8 col-md-offset-2 well well-sm">
+<div id="signup">
+<div class="col-md-8 col-md-offset-2 well well-sm" >
     
-               <form data-toggle="validator" role="form" method="POST" action="">
+               <form id="signup" data-toggle="validator" role="form" method="POST" action="#">
 
                   <legend class="text-center active">  <label>Đăng kí tài khoản</label></legend>
 
@@ -72,13 +76,13 @@ else
 
                         <div class="form-group col-md-6">
                             <label for="first_name">Tên của bạn</label>
-                             <input  data-error="Vui lòng nhập tên của bạn" type="text" class="form-control" name="first_name" id="first_name" placeholder="Nhập tên" required>
+                             <input   maxlength="10" data-error="Vui lòng nhập đúng tên của bạn" type="text" class="form-control" name="first_name" id="first_name" placeholder="Nhập tên" required>
                <div class="help-block with-errors"></div>
                         </div>
 
                         <div class="form-group col-md-6">
                             <label for="last_name">Họ của bạn</label>
-                             <input  data-error="Vui lòng nhập họ của bạn" type="text" class="form-control" name="last_name" id="last_name" placeholder="Nhập Họ" required>
+                             <input   maxlength="10"  data-error="Vui lòng nhập đúng họ của bạn" type="text" class="form-control" name="last_name" id="last_name" placeholder="Nhập Họ" required>
                          <div class="help-block with-errors"></div>
                         </div>
 
@@ -86,12 +90,14 @@ else
                             <label for="">Email</label>
                               <input data-error="Vui lòng nhập đúng định dạng email" type="email" class="form-control" name="email" id="email" placeholder="Email" required>     
                <div class="help-block with-errors"></div>
+               <div id="showerror" style='color:red'></div>
+             
                         </div>
 
 
                         <div class="form-group col-md-12">
                             <label for="">Số điện thoại</label>
-                             <input data-minlength="10" type="number" data-error="Vui lòng nhập đúng số điên thoại" class="form-control" name="phone" id="phone" placeholder="Số điện thoại" required>    
+                             <input  data-minlength="10" type="number" data-error="Vui lòng nhập đúng số điên thoại" class="form-control" name="phone" id="phone" placeholder="Số điện thoại" required>    
                <div class="help-block with-errors"></div>
                         </div>
 
@@ -119,7 +125,8 @@ else
                         <div class="col-md-12">
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" value="" id=""  data-error="Hãy đồng ý với điều khoản dịch vụ" required>
+
+                                    <input type="checkbox" value="no" id="" name="confirm"  data-error="Hãy đồng ý với điều khoản dịch vụ" required>
                                     Tôi đồng ý với <a href="#">Điều khoản dịch vụ</a> của Chơsinhvien.
                                    <div class="help-block with-errors"></div>
                                 </label>
@@ -132,12 +139,18 @@ else
                             <button type="submit" class="btn btn-primary">
                                 Đăng kí
                             </button>
-                           
+                            <div id="errorinput" style='color:red'></div>
                         </div>
                     </div>
 
                 </form>
             </div>
+</div>
+
+<div id="login"></div><!--hiển thị sau khi đăng kí thành công-->
+  
+
+
 
        
            
@@ -151,13 +164,15 @@ else
     </div>
 
           <!------------------------- END Content -------------->
-        <!--xu ly ajax-->
+            
+      <!-- end container -->
+ <!--xu ly ajax-->
         <script language="javascript">
-             $('form').submit(function (){
-                    alert('Bạn đã click đăng ký');
+               $('#signup').submit(function (){
+                     $('#errorinput').html('');
                     return false;
                 });
-            $('form').submit(function ()
+            $('#signup').submit(function ()
             {
                 // Xóa trắng thẻ div show lỗi
                 $('#showerror').html('');
@@ -167,18 +182,22 @@ else
                 var last_name = $('#last_name').val();
                 var phone = $('#phone').val();
                 var password = $('#password').val();
+                var confirm_password = $('#confirm_password').val();
+                var confirm = $('#confirm').val();//checkbox điều khoản
                 // Kiểm tra dữ liệu có null hay không
-                if ($.trim(email) == ''){
-                    alert('Bạn chưa nhập email');
+             
+                if ($.trim(first_name) == ''||$.trim(email) == ''||$.trim(last_name) == ''||$.trim(phone) == ''||$.trim(password) == ''||$.trim(confirm_password) == ''){
+                   $('#errorinput').append('Vui lòng nhập đầy đủ thông tin trước khi nhấn đăng kí');
                     return false;
                 }
+            
                 
                 // Nếu bạn thích có thể viết thêm hàm kiểm tra định dang email
                 // ở đây tôi làm chú yêu chỉ cách dùng ajax nên sẽ ko đề cập tới,
                 // vì sợ bài dài sẽ rối
                 
                 $.ajax({
-                    url : 'do_validate.php',
+                    url : 'signuppost.php',
                     type : 'post',
                     dataType : 'json',
                     data : {
@@ -212,7 +231,10 @@ else
                         }
                         else {
                             // Thành công
-                            $('#showerror').append('Thêm thành công');
+                            $('#signup').html('');
+   
+                             $('#login').html("<div id='fade' class='col-md-8 col-md-offset-2'><div class='alert alert-success'> <span class='glyphicon glyphicon-ok'></span> Xin chúc mừng bạn đã tạo thành công tài khoản bây giờ bạn có thể đăng nhập ngay.</div><div class='modal-dialog'>  <div class='loginmodal-container'>    <h1>Đăng nhập</h1><br>    <form method='POST' action='loginpost.php'>    <input type='text' name='email' placeholder='Email' value='"+$.trim(email)+"'>    <input type='password' name='password' placeholder='Mật khẩu'><span style='color:red'></span>    <input type='submit' class='btn btn-primary' value='Đăng nhập'>    </form> </div></div></div>");
+
                         }
                     }
                 });
@@ -221,8 +243,6 @@ else
             });
             
         </script>
-      <!-- end container -->
-
   <!-- footer -->
 <?php
 

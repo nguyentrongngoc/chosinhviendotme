@@ -60,32 +60,35 @@ include('../category_post.php');
 
           <?php
  include ('../connect.php');
-  $str = $_GET['keyword'];
-  $str2 = $_GET['address'];
-  $sql = "SELECT * FROM postads";
+  $keyword = $_GET['keyword'];
+  $address = $_GET['address'];
+  $sql = "SELECT * FROM postads where title like '%$keyword%' order by id desc";
   $result = mysqli_query($conn, $sql);
-echo"<title>Chơsinhvien.me | {$str} ({$str2})</title>";
+echo"<title>Chơsinhvien.me | {$keyword} ({$address})</title>";
 echo "
  <ol class = 'breadcrumb'>
    <li><a href = '../index.php'>Trang Chủ</a></li>
-   <li>Tìm kiếm: $str ($str2)</li>
+   <li>Tìm kiếm: $keyword ($address)</li>
+
 </ol>
+<i id='countresult' style='color:red'></i>
 ";
 
 
 
-function adddotstring($strNum) {
+
+function adddotstring($keywordNum) {
  
-        $len = strlen($strNum);
+        $len = strlen($keywordNum);
         $counter = 3;
         $result = "";
         while ($len - $counter >= 0)
         {
-            $con = substr($strNum, $len - $counter , 3);
+            $con = substr($keywordNum, $len - $counter , 3);
             $result = '.'.$con.$result;
             $counter+= 3;
         }
-        $con = substr($strNum, 0 , 3 - ($counter - $len) );
+        $con = substr($keywordNum, 0 , 3 - ($counter - $len) );
         $result = $con.$result;
         if(substr($result,0,1)=='.'){
             $result=substr($result,1,$len+1);   
@@ -93,30 +96,35 @@ function adddotstring($strNum) {
         return $result;
 
 }
-if ($str2=='TP.HCM')
+
+$kt=0;
+if ($address=='TP.HCM')
 while($data = mysqli_fetch_array($result))
    {  
-    if(strpos($data['title'],$str)!==false)
-    {
     $price=adddotstring($data['price']);  
-    $data['content'] = substr($data['content'],0,300);
+    $data['content'] = mb_substr($data['content'],0,300,'UTF-8');
     include('../details/listview.php');
-     exit;
-    }
+    $kt++;
+
    }
 else
   while($data = mysqli_fetch_array($result))
    {  
-    if(strpos($data['title'],$str)!==false&&$data['address']==$str2)
+    if($data['address']==$address)
     {
     $price=adddotstring($data['price']);  
-    $data['content'] = substr($data['content'],0,300);
+    $data['content'] = mb_substr($data['content'],0,300,'UTF-8');
     include('../details/listview.php');
-    exit;
+    $kt++;
     }
    }
-echo"<i style='color:red'>*Không tìm thấy có kết quả nào</i>";
-
+ if ($kt==0)
+ {
+  echo"<i style='color:red'>*Không tìm thấy có kết quả nào</i>";
+  include('../footer.php');
+  exit;
+  }
+echo "<script language='javascript'>$('#countresult').html('*Đã tìm thấy $kt kết quả');</script>";
 ?>
 
 

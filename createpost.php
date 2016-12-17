@@ -47,7 +47,7 @@ include('category_post.php');
  if (!isset($_SESSION['id_member'])) 
 { //chưa đăng nhập
      echo "<div class='alert alert-warning'> <span class='glyphicon glyphicon-remove'></span> Bạn chưa đăng nhập,hãy đăng nhâp để đăng tin rao vặt</a>
-     <br/><span class='glyphicon glyphicon-pencil'></span> Nếu bạn chưa là thành viên hãy  <a href='signup.php' class='alert-link'> đăng kí thành viên tại đây </a></div>";
+    </div>";
      echo "<div class='modal-dialog'>  <div class='loginmodal-container'>    <h1>Đăng nhập</h1><br>    <form method='POST' action='loginpost.php'>    <input type='text' name='email' placeholder='Email'>    <input type='password' name='password' placeholder='Mật khẩu'>   <input type='submit' class='btn btn-primary' value='Đăng nhập'>    </form>  <div class='login-help'>   <a style='color:black' href='http://localhost:8080/chosinhvien/signup.php'><strong>Bạn chưa có tài khoản ?</strong>    </div>  </div></div>";
      include('footer.php');
 
@@ -60,27 +60,27 @@ include('category_post.php');
             <div class="col-md-8 col-md-offset-2 well well-sm">
     
  
-<form  data-toggle="validator" role="form" method="POST" action="createpostpost.php" enctype="multipart/form-data">
+<form  data-toggle="validator" role="form" method="POST" action="createpostpost.php" enctype="multipart/form-data" >
 
                   <legend class="text-center active">  <label>Đăng Tin Rao Vặt</label></legend>
 
                     <fieldset>
 
-                  <input type="hidden" name="user" value="<?php     
-                  echo $_SESSION['first_name'];
-                  echo ' ';
-                  echo $_SESSION['last_name'];?>" />
-
-              <input type="hidden" name="id_member" value="<?php     
-                  echo $_SESSION['id_member'];?>" />
-
-             <input type="hidden" name="time" value="<?php
-                    date_default_timezone_set('Asia/Ho_Chi_Minh');
-                    $t=time();
-                    echo(date("Y-m-d h:i",$t));
-                    ?>" />
-
-
+<?php
+      include('connect.php');
+      $id_member=$_SESSION['id_member'];
+      $sql = "SELECT *, id FROM member WHERE id='$id_member'";
+      $result = mysqli_query($conn, $sql);
+      $data = mysqli_fetch_array($result);
+      date_default_timezone_set('Asia/Ho_Chi_Minh');
+      $date = date('H:i d-m-Y');
+      echo"
+      <input type='hidden' name='user' value='{$data['first_name']} {$data['last_name']}' />
+      <input type='hidden' name='id_member' value='{$data['id']}'/>
+      <input type='hidden' name='time' value='$date'/>
+      ";
+?>
+                
                         <div class="form-group col-md-12">
                             <label for="">Tiêu Đề</label>
                             <input data-error="Vui lòng nhập tiêu đề" type="text" class="form-control" name="title" id="" placeholder="Nhập tiêu đề" required>

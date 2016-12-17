@@ -20,8 +20,14 @@
  <script src="http://localhost:8080/chosinhvien/js/gotop.js"></script>
  <script src="http://localhost:8080/chosinhvien/js/validador.js"></script>
     <script language="javascript" src="http://localhost:8080/chosinhvien/js/jquery-3.1.1.min.js" ></script>
-        <script language="javascript" src="http://localhost:8080/chosinhvien/js/ajax_index.js" ></script>
+        <script language="javascript" src="http://localhost:8080/chosinhvien/js/ajax_loadingpost.js" ></script>
 
+<style>
+a {
+    color: #18bc9c;
+    text-decoration: none;
+}
+</style>
 <?php
 ///error_reporting(0); // chăn thông báo lỗi
 ?>
