@@ -139,7 +139,6 @@ else
                             <button type="submit" class="btn btn-primary">
                                 Đăng kí
                             </button>
-                            <div id="errorinput" style='color:red'></div>
                         </div>
                     </div>
 
@@ -186,10 +185,11 @@ else
                 var confirm = $('#confirm').val();//checkbox điều khoản
                 // Kiểm tra dữ liệu có null hay không
              
-                if ($.trim(first_name) == ''||$.trim(email) == ''||$.trim(last_name) == ''||$.trim(phone) == ''||$.trim(password) == ''||$.trim(confirm_password) == ''){
-                   $('#errorinput').append('Vui lòng nhập đầy đủ thông tin trước khi nhấn đăng kí');
+                if ($.trim(first_name) == ''||$.trim(email) == ''||$.trim(last_name) == ''||$.trim(phone) == ''||$.trim(password) == ''||$.trim(confirm_password) == '')
                     return false;
-                }
+                if ($.trim(password) != $.trim(confirm_password))
+                    return false;
+ 
             
                 
                 // Nếu bạn thích có thể viết thêm hàm kiểm tra định dang email
@@ -211,11 +211,6 @@ else
                     {
                         // Kiểm tra xem thông tin gửi lên có bị lỗi hay không
                         // Đây là kết quả trả về từ file do_validate.php
-                        if (!result.hasOwnProperty('error') || result['error'] != 'success')
-                        {
-                            alert('Có vẻ như bạn đang hack website của tôi');
-                            return false;
-                        }
                         
                         var html = '';
                         
