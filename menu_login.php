@@ -217,12 +217,10 @@ else
     	  <div class="modal-dialog">
 				<div class="loginmodal-container">
 					<h1>Đăng nhập</h1><br>
-				  <form  data-toggle="validator" role="form" method="POST" action="http://localhost:8080/chosinhvien/loginpost.php">
-					<input type="text" name="email" placeholder="Email" required>
-
-
-					<input type="password" name="password" placeholder="Mật khẩu" required>
-          
+				  <form  id="loginss" data-toggle="validator" role="form" method="POST" action="">
+					<input type="text" name="email" id="email" placeholder="Email" required>
+					<input type="password" name="password" id="password" placeholder="Mật khẩu" required>
+          <div id="showerror"></div>
 					<input type="submit" class="btn btn-primary" value="Đăng nhập">
 				  </form>
 					
@@ -231,9 +229,60 @@ else
 				  </div>
 				</div>
 			</div>
-		  </div>
+</div>
+
     <!-- Login form-->
-	
+ <script language="javascript">
+            $('#loginss').submit(function ()
+            {
+                // Xóa trắng thẻ div show lỗi
+                $('#showerror').html('');
+            
+                var email = $('#email').val();
+                var password = $('#password').val();
+                // Kiểm tra dữ liệu có null hay không
+                    
+                
+                // Nếu bạn thích có thể viết thêm hàm kiểm tra định dang email
+                // ở đây tôi làm chú yêu chỉ cách dùng ajax nên sẽ ko đề cập tới,
+                // vì sợ bài dài sẽ rối
+                
+                $.ajax({
+                    url : 'loginpost.php',
+                    type : 'post',
+                    dataType : 'json',
+                    data : {
+                        email : email,
+                        password : password
+                    },
+                    success : function (result)
+                    {
+                        // Kiểm tra xem thông tin gửi lên có bị lỗi hay không
+                        // Đây là kết quả trả về từ file do_validate.php
+                        
+                        var html = '';
+                        
+                        // Lấy thông tin lỗi email
+                        if ($.trim(result.email) != ''){
+                            html += result.email;
+                        }
+                       
+                        // Cuối cùng kiểm tra xem có lỗi không
+                        // Nếu có thì xuất hiện lỗi
+                        if (html != ''){
+                            $('#showerror').append(html);
+                        }
+                        else {
+                            // Thành công
+
+                        }
+                    }
+                });
+                
+                return false;
+            });
+            
+        </script>	
 	    <!------------------------- END Header -------------->
 	
 
