@@ -142,6 +142,7 @@ echo "
                             </div>
 
                     </fieldset>
+                    <div id='errorinput' style='color:red'></div><br/>
                     <div class='form-group'>
                         <div class='col-md-12'>
                         <div id='errorpassword' style='color:red'></div>
@@ -154,7 +155,7 @@ echo "
                 </form>
             </div>
 </div>
-<div id='showerror'></div>
+<div id='success'></div>
 ";
 ?>
 
@@ -168,12 +169,30 @@ echo "
                 var phone = $('#phone').val();  
                 var password = $('#password').val();  
                 var passwordnew = $('#passwordnew').val();
+                var confirm_password = $('#confirm_password').val();
 
                 //kiem tra xem nhap du thong tin chua
-                if ($.trim(first_name) == ''||$.trim(last_name) == ''||$.trim(phone) == ''){
-                   $('#showerror').append('Vui lòng nhập đầy đủ thông tin trước khi nhấn đăng kí');
+                if ($.trim(password) == '')
+                {
+                  if ($.trim(first_name) == ''||$.trim(last_name) == ''||$.trim(phone) == ''){
+                    $('#errorinput').html('');
+                   $('#errorinput').append('Vui lòng nhập đầy đủ thông tin trước khi nhấn cập nhật');
                     return false;
+                  }
                 }
+                else if ($.trim(passwordnew) == '' || $.trim(confirm_password) == '')
+                      {
+                           $('#errorinput').html('');
+                          $('#errorinput').append('Vui lòng nhập mật khẩu mới');
+                          return false;
+                      }
+                      else if ($.trim(passwordnew) != $.trim(confirm_password))
+                            {
+                              $('#errorinput').html('');
+                              return false;
+                          }
+                    
+              
                 $.ajax({
                     url : 'updatepost.php',
                     type : 'post',
@@ -201,7 +220,7 @@ echo "
                         else 
                           {
                             $('#edit').html('');
-                            $('#showerror').append("<div id='fade'><div class='alert alert-success col-md-9'> <span class='glyphicon glyphicon-ok'></span> Cập nhật thành công.</div></div>");
+                            $('#success').append("<div id='fade'><div class='alert alert-success col-md-9'> <span class='glyphicon glyphicon-ok'></span> Cập nhật thành công.</div></div>");
                           }
                     }
                 });                
